@@ -1,0 +1,7 @@
+.env
+rates-cache.json
+node_modules/
+npm-debug.log
+.DS_Store
+PDF/
+.vscode/
