@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineVault | Discover Your Next Favorite Movie</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+
+    <!-- Normalize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+
+    <!-- Google Font: Inter (Modern & Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/img/cine-vault-logo.png" type="image/png" />
+
+    <!-- Main JS (Only Client Side Logic) -->
+    <script src="./js/main.js" defer></script>
+  </head>
+  <body>
+    <!-- 
+      HEADER
+      Nota: La clase .container va en el <nav>, no en el <header>.
+      Así el fondo del header (si le ponemos color) ocupa el 100%, 
+      pero los elementos respetan los márgenes.
+    -->
+    <header class="navbar-container" id="main-header">
+      <nav class="nav-bar container">
+        <!-- Brand Identity & Menu Trigger -->
+        <div class="nav-brand">
+          <a href="#" class="logo-link">
+            <img
+              src="./assets/img/cine-vault-logo.png"
+              alt="CineVault Logo"
+              class="logo-img"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'"
+            />
+          </a>
+          <span class="logo-text">CineVault</span>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="nav-search">
+          <form id="search-form" onsubmit="event.preventDefault();">
+            <div class="search-input-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"
+                ></path>
+              </svg>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Movies, actors, genres..."
+                autocomplete="off"
+              />
+            </div>
+          </form>
+        </div>
+
+        <!-- Navigation Actions -->
+        <ul class="nav-links">
+          <li>
+            <a href="#trending" class="nav-item active">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 23C16.1421 23 19.5 19.6421 19.5 15.5C19.5 14.6345 19.2697 13.8032 19 13.0296C17.3333 14.6765 16.0667 15.5 15.2 15.5C19.1954 8.5 17 5.5 11 1.5C11.5 6.49951 8.20403 8.77375 6.86179 10.0366C5.40786 11.4045 4.5 13.3462 4.5 15.5C4.5 19.6421 7.85786 23 12 23ZM12.7094 5.23498C15.9511 7.98528 15.9666 10.1223 13.463 14.5086C12.702 15.8419 13.6648 17.5 15.2 17.5C15.8884 17.5 16.5841 17.2992 17.3189 16.9051C16.6979 19.262 14.5519 21 12 21C8.96243 21 6.5 18.5376 6.5 15.5C6.5 13.9608 7.13279 12.5276 8.23225 11.4932C8.35826 11.3747 8.99749 10.8081 9.02477 10.7836C9.44862 10.4021 9.7978 10.0663 10.1429 9.69677C11.3733 8.37932 12.2571 6.91631 12.7094 5.23498Z"
+                ></path>
+              </svg>
+              <span>Trending</span>
+            </a>
+          </li>
+          <li>
+            <a href="#watchlist" class="nav-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M5 2H19C19.5523 2 20 2.44772 20 3V22.1433C20 22.4194 19.7761 22.6434 19.5 22.6434C19.4061 22.6434 19.314 22.6168 19.2344 22.5669L12 18.0313L4.76559 22.5669C4.53163 22.7136 4.22306 22.6429 4.07637 22.4089C4.02647 22.3293 4 22.2373 4 22.1433V3C4 2.44772 4.44772 2 5 2ZM18 4H6V19.4324L12 15.6707L18 19.4324V4Z"
+                ></path>
+              </svg>
+              <span>My Vault</span>
+            </a>
+          </li>
+          <!-- Theme Toggle -->
+          <li>
+            <button
+              id="theme-toggle"
+              class="theme-btn"
+              aria-label="Toggle Dark Mode"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"
+                ></path>
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button class="account-btn" id="acc-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM6.02332 15.4163C7.49083 17.6069 9.69511 19 12.1597 19C14.6243 19 16.8286 17.6069 18.2961 15.4163C16.6885 13.9172 14.5312 13 12.1597 13C9.78821 13 7.63095 13.9172 6.02332 15.4163ZM12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 
+      SIDEBAR MENU (Off-canvas)
+      Este NO lleva container porque es un elemento flotante fixed.
+    -->
+    <aside id="sidebar-menu" class="">
+      <div class="sidebar-header">
+        <button class="mobile-menu-btn" aria-label="Open Sidebar">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- User Account Section -->
+      <div class="sidebar-section">
+        <h3>Account</h3>
+        <ul class="sidebar-links">
+          <li>
+            <a href="#" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"
+                ></path>
+              </svg>
+              <span>My Profile</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM4 5V19H20V5H4ZM10.6219 8.41459L15.5008 11.6672C15.6846 11.7897 15.7343 12.0381 15.6117 12.2219C15.5824 12.2658 15.5447 12.3035 15.5008 12.3328L10.6219 15.5854C10.4381 15.708 10.1897 15.6583 10.0672 15.4745C10.0234 15.4088 10 15.3316 10 15.2526V8.74741C10 8.52649 10.1791 8.34741 10.4 8.34741C10.479 8.34741 10.5562 8.37078 10.6219 8.41459Z"
+                ></path>
+              </svg>
+              <span>My Playlists</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Categories Navigation -->
+      <div class="sidebar-section">
+        <h3>Categories</h3>
+        <ul class="sidebar-links">
+          <li>
+            <a href="#category-action" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.501 11L9.64546 11.0069C10.3586 11.075 10.926 11.6424 10.9941 12.3555L11.001 12.5L10.9941 12.6445C10.926 13.3576 10.3586 13.925 9.64546 13.9931L9.501 14H6.001V16H9.501C11.2009 16 12.6178 14.7881 12.9348 13.1811L12.9654 13.0009L19.001 13C19.7123 13 20.3889 12.8515 21.0015 12.5837L21.001 17C21.001 18.3059 20.1666 19.4169 19.0019 19.829L19.001 21C19.001 21.5523 18.5533 22 18.001 22H6.001C5.44872 22 5.001 21.5523 5.001 21L5.00109 19.8293C3.83585 19.4175 3.001 18.3063 3.001 17V13C3.001 11.8954 3.89643 11 5.001 11H9.501ZM22.001 7.5V8L21.9959 8.17627C21.908 9.69275 20.6938 10.907 19.1773 10.9949L19.001 11H12.6642C12.1305 9.87663 11.0161 9.08266 9.70894 9.00607L9.501 9H5.001C4.27201 9 3.58857 9.19501 3 9.53571L3.001 6C3.001 3.79086 4.79186 2 7.001 2H16.501C19.5386 2 22.001 4.46243 22.001 7.5Z"
+                ></path>
+              </svg>
+              <span>Action</span></a
+            >
+          </li>
+          <li>
+            <a href="#category-scifi" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M13.5 2C13.5 2.44425 13.3069 2.84339 13 3.11805V5H18C19.6569 5 21 6.34315 21 8V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18V8C3 6.34315 4.34315 5 6 5H11V3.11805C10.6931 2.84339 10.5 2.44425 10.5 2C10.5 1.17157 11.1716 0.5 12 0.5C12.8284 0.5 13.5 1.17157 13.5 2ZM0 10H2V16H0V10ZM24 10H22V16H24V10ZM9 14.5C9.82843 14.5 10.5 13.8284 10.5 13C10.5 12.1716 9.82843 11.5 9 11.5C8.17157 11.5 7.5 12.1716 7.5 13C7.5 13.8284 8.17157 14.5 9 14.5ZM16.5 13C16.5 12.1716 15.8284 11.5 15 11.5C14.1716 11.5 13.5 12.1716 13.5 13C13.5 13.8284 14.1716 14.5 15 14.5C15.8284 14.5 16.5 13.8284 16.5 13Z"
+                ></path>
+              </svg>
+              <span>Sci-Fi</span></a
+            >
+          </li>
+          <li>
+            <a href="#category-horror" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C15.5 2 18 5 19 8C22 9 23 11.73 23 14L20.2253 14.7928C19.796 14.9154 19.5 15.3078 19.5 15.7543V17.25C19.5 18.2165 18.7165 19 17.75 19H17.1536C16.4825 19 15.8562 19.3366 15.4858 19.8962C14.5576 21.2987 13.3957 22 12 22C10.6043 22 9.44238 21.2987 8.5142 19.8962C8.14383 19.3366 7.51746 19 6.84636 19H6.25C5.2835 19 4.5 18.2165 4.5 17.25V15.7543C4.5 15.3078 4.20402 14.9154 3.77472 14.7928L1 14C1 11.7337 2 9 5 8C6 5 8.5 2 12 2ZM12 12C11.1716 12 10.5 13.1193 10.5 14.5C10.5 15.8807 11.1716 17 12 17C12.8284 17 13.5 15.8807 13.5 14.5C13.5 13.1193 12.8284 12 12 12ZM9.5 8C8.67157 8 8 8.67157 8 9.5C8 10.3284 8.67157 11 9.5 11C10.3284 11 11 10.3284 11 9.5C11 8.67157 10.3284 8 9.5 8ZM14.5 8C13.6716 8 13 8.67157 13 9.5C13 10.3284 13.6716 11 14.5 11C15.3284 11 16 10.3284 16 9.5C16 8.67157 15.3284 8 14.5 8Z"
+                ></path>
+              </svg>
+              <span>Horror</span></a
+            >
+          </li>
+          <li>
+            <a href="#category-comedy" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 11C10 11 8.33333 11.3333 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C15.6667 11.3333 14 11 12 11ZM8.5 7C7.34792 7 6.37786 7.77929 6.08818 8.8395L6.04989 9.00057H10.9501C10.7187 7.85917 9.70968 7 8.5 7ZM15.5 7C14.3479 7 13.3779 7.77929 13.0882 8.8395L13.0499 9.00057H17.9501C17.7187 7.85917 16.7097 7 15.5 7Z"
+                ></path>
+              </svg>
+              <span>Comedy</span></a
+            >
+          </li>
+          <li>
+            <a href="#category-romance" class="sidebar-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M16.5 3C19.5376 3 22 5.5 22 9C22 16 14.5 20 12 21.5C9.5 20 2 16 2 9C2 5.5 4.5 3 7.5 3C9.35997 3 11 4 12 5C13 4 14.64 3 16.5 3Z"
+                ></path>
+              </svg>
+              <span>Romance</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div id="sidebar-overlay" class="overlay hidden"></div>
+
+    <main class="main-content">
+      <!-- 
+        HERO SECTION 
+        Este NO lleva .container porque queremos que sea Full Width (100vw).
+      -->
+      <section id="hero-section" class="hero-container">
+        <div class="hero-backdrop" id="hero-backdrop"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-3d-scene">
+          <div class="hero-card-3d" id="hero-movie-card">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <span class="rank-number">#1</span>
+                <span class="rank-label">Trending Worldwide</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img hidden"
+              />
+              <h1 id="hero-title-text" class="movie-title-fallback">
+                Featured Movie
+              </h1>
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+            <div class="card-shine"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 
+        CATEGORIAS
+        Aquí SÍ usamos .container para que los carruseles se alineen con el logo.
+      -->
+
+      <section id="category-action" class="category-section container">
+        <div class="category-header">
+          <h2>Adrenaline Rush (Action)</h2>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-chevron-right"></i
+          ></a>
+        </div>
+        <div class="movie-carousel" id="carousel-action">
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+        </div>
+      </section>
+
+      <section id="category-scifi" class="category-section container">
+        <div class="category-header">
+          <h2>New Worlds (Sci-Fi)</h2>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-chevron-right"></i
+          ></a>
+        </div>
+        <div class="movie-carousel" id="carousel-scifi">
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+        </div>
+      </section>
+
+      <section id="category-horror" class="category-section container">
+        <div class="category-header">
+          <h2>Chills & Thrills (Horror)</h2>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-chevron-right"></i
+          ></a>
+        </div>
+        <div class="movie-carousel" id="carousel-horror">
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+        </div>
+      </section>
+
+      <section id="category-comedy" class="category-section container">
+        <div class="category-header">
+          <h2>Laugh Out Loud (Comedy)</h2>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-chevron-right"></i
+          ></a>
+        </div>
+        <div class="movie-carousel" id="carousel-comedy">
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+        </div>
+      </section>
+
+      <section id="category-romance" class="category-section container">
+        <div class="category-header">
+          <h2>Love Stories (Romance)</h2>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-chevron-right"></i
+          ></a>
+        </div>
+        <div class="movie-carousel" id="carousel-romance">
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+          <div class="movie-card skeleton"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL -->
+    <div id="movie-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <div class="modal-body">
+          <h2>Movie Details</h2>
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <!-- 
+        Usamos container en el contenido interior para centrarlo,
+        pero el footer mantiene su fondo completo si lo tuviera.
+      -->
+      <div class="footer-content container">
+        <div class="footer-brand">
+          <h3>CineVault</h3>
+          <p>
+            Your personal curator for the cinematic universe. Powered by passion
+            and code.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">New Releases</a></li>
+            <li><a href="#">Top Rated</a></li>
+            <li><a href="#">Oscar Winners</a></li>
+            <li><a href="#">Hidden Gems</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Tech & Legal</h4>
+          <ul>
+            <li>
+              <a href="https://www.themoviedb.org/" target="_blank">TMDB API</a>
+            </li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li>
+              <a href="https://github.com/castezz" target="_blank"
+                >GitHub Repo</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom container">
+        <p>
+          &copy; 2025 CineVault. Designed & Developed by Andres Castellanos.
+        </p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-github"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
