@@ -3,14 +3,14 @@
    ========================================= */
 :root {
   /* ---------------------------------------
-     0.1. RGB PRIMITIVES (NEW: For advanced opacity effects)
+     0.1. RGB PRIMITIVES
      --------------------------------------- */
   --rgb-primary: 229, 9, 20;
   --rgb-dark: 20, 20, 20;
   --rgb-surface: 31, 31, 31;
 
   /* ---------------------------------------
-     0.2. ORIGINAL PALETTE (YOUR VARIABLES INTACT)
+     0.2. ORIGINAL PALETTE
      --------------------------------------- */
   --red-vibrant: #e50914;
   --red-wine: #831010;
@@ -36,10 +36,10 @@
   --text-muted: #555555;
 
   /* ---------------------------------------
-     0.3. DIMENSIONS (SIDEBAR & HEADER)
+     0.3. DIMENSIONS
      --------------------------------------- */
   --sidebar-width-mini: 88px;
-  --sidebar-width-full: 270px;
+  --sidebar-width-full: 240px;
   --header-height: 80px;
 
   /* ---------------------------------------
@@ -169,13 +169,14 @@ svg {
 .main-footer {
   width: 100%;
   padding-left: var(--sidebar-width-mini);
-  transition: padding-left var(--transition-smooth);
+  transition: padding-left var(--transition-normal);
 }
 
 body.menu-open #main-header,
 body.menu-open .main-content,
 body.menu-open .main-footer {
   padding-left: var(--sidebar-width-full);
+  transition: padding-left var(--transition-normal);
 }
 
 .main-content {
@@ -345,7 +346,7 @@ body.menu-open .main-footer {
 
 .nav-item:hover {
   color: var(--text-white);
-  background-color: var(--color-primary);
+  background-color: var(--red-wine);
   box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
   transform: translateY(-2px);
 
@@ -432,14 +433,14 @@ body.menu-open .main-footer {
   background-color: var(--dark-base);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 
-  transition: width var(--transition-sidebar);
-
   display: flex;
   flex-direction: column;
-  padding-top: var(--header-height);
+  padding-top: 110px;
 
   overflow-x: hidden;
   white-space: nowrap;
+
+  transition: width var(--transition-normal);
 }
 
 body.menu-open #sidebar-menu {
@@ -576,19 +577,259 @@ body.menu-open .sidebar-header {
    ========================================= */
 
 .hero-container {
-  display: flex;
-  align-items: center;
+  position: relative; /* Punto de referencia para los hijos absolutos */
+  width: 100vw; /* 100% del ancho del viewport */
+  height: 80vh; /* Ocupa el 80% del alto de la pantalla (ajustable) */
+  max-width: 1600px;
+  max-height: 900px;
+  margin: 0 auto;
+  overflow: hidden; /* Si algo se sale (como un borde borroso), lo recorta */
+  display: flex; /* Para centrar la tarjeta 3D más adelante */
   justify-content: center;
-  height: calc(100vh - var(--header-height));
+  align-items: center;
+  background-color: #000; /* Color de fondo por si la imagen falla */
 }
 
 .hero-backdrop {
+  position: absolute; /* Se sale del flujo para pegarse a los bordes */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Al fondo de todo */
+
+  /* IMAGEN DE EJEMPLO (Usando un poster de demo de Cloudinary) */
+  /* Fíjate en los parámetros: /image/upload/f_auto,q_auto,w_1920/ */
+  background-image: url("https://res.cloudinary.com/dihhs3thq/image/upload/f_auto,q_auto,w_1920/v1765387120/prueba_vrpwfz.jpg");
+
+  background-size: cover; /* CLAVE: Cubre todo sin estirar/deformar */
+  background-repeat: no-repeat;
+  background-position: center top;
+  /* Opcional: Un pequeño filtro para que no compita con la tarjeta 3D */
+  opacity: 0.5;
+  filter: blur(3px);
+  transform: scale(1.05);
+}
+
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../assets/img/hero-backdrop.jpg");
+  z-index: 1;
+
+  /* AQUÍ ESTÁ EL CAMBIO */
+  background: 
+    /* 1. La Viñeta (Sombra en los bordes): */
+    /* El centro es transparente. La sombra negra empieza suave al 50% y es total al 100% */ radial-gradient(
+      circle at center,
+      transparent 40%,
+      rgba(0, 0, 0, 0.8) 85%,
+      #000 100%
+    ),
+    /* 2. El Desvanecido Inferior (Para conectar con el resto de la web): */
+      /* Solo oscurece la parte de abajo para que no se note el corte */
+      linear-gradient(to bottom, transparent 80%, #000 100%),
+    /* 2. Lado ARRIBA (De transparente a negro hacia arriba) */
+      linear-gradient(to top, transparent 80%, #000 100%),
+    /* 3. Lado DERECHA (De transparente a negro hacia la derecha) */
+      linear-gradient(to right, transparent 80%, #000 100%),
+    /* 4. Lado IZQUIERDA (De transparente a negro hacia la izquierda) */
+      linear-gradient(to left, transparent 80%, #000 100%);
+
+  pointer-events: none;
+}
+
+/* EL ESCENARIO (Padre) */
+.hero-3d-scene {
+  perspective: 1000px; /* Profundidad de la cámara */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* No lleva transition, el escenario es estático */
+}
+
+.hero-card-3d {
+  position: relative;
+  z-index: 1;
+  width: 22%;
+  aspect-ratio: 2 / 3;
+  transform-style: preserve-3d;
+  /* Mantenemos tu rotación */
+  transform: perspective(1000px) rotateY(var(--rotateY, 0deg))
+    rotateX(var(--rotateX, 0deg));
+  transition: transform 0.5s ease-out;
+  border-radius: 15px;
+}
+
+/* CAPA 2: EL BORDE DORADO (Usamos ::after) */
+.golden::after {
+  content: "";
+  position: absolute;
+  inset: -4px; /* Un poco más grande para que sobresalga */
+  z-index: -1; /* Detrás de la carta */
+  background: linear-gradient(
+      45deg,
+      #5c3d0b 0%,
+      #ffc300 25%,
+      #a0780f 50%,
+      #ffc300 75%,
+      #5c3d0b 100%
+    )
+    repeat 0% 0% / 300% 100%;
+  border-radius: 17px;
+  filter: blur(8px);
+  animation: golden 6s linear infinite;
+}
+
+/* 3. LAS IMÁGENES DENTRO DE LA CARTA */
+.layer-poster,
+.layer-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transform: translateZ(0px);
+
+  /* Esto evita que la imagen se vea borrosa al rotar */
+  backface-visibility: hidden;
+}
+
+.layer-poster {
+  animation: entradaTriunfal 1.1s ease-in-out;
+}
+/* Ajuste para que la imagen del poster llene la carta */
+.movie-poster-img,
+.movie-logo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+  border-radius: 15px;
+}
+
+.movie-logo-img {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 1s cubic-bezier(0.1, 0, 0.1, 1);
+}
+
+.hero-card-3d:hover {
+  .movie-logo-img {
+    clip-path: circle(150% at 50% 50%);
+    transition: clip-path 1s cubic-bezier(0.7, 0, 0.3, 1);
+    opacity: 1;
+  }
+  span,
+  .categories {
+    opacity: 1;
+  }
+}
+
+/* El logo por defecto (oculto o centrado) */
+.layer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* O tal vez align-items: flex-end si quieres el logo abajo */
+  z-index: 2; /* Encima del poster */
+  transform-style: preserve-3d;
+}
+
+.ranking-badge {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: translateZ(100px);
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  transform: translate(55px, 80px);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0.5, 1);
+
+  ul {
+    width: fit-content;
+    height: 100%;
+    justify-content: space-between;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+
+.rank-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(10%, 75%);
+  font-size: 12rem;
+
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  background: linear-gradient(
+    135deg,
+    var(--gold-accent) 30%,
+    var(--text-white) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  filter: drop-shadow(0px 2px 2px rgba(255, 255, 255, 0.3));
+  display: inline-block;
+  opacity: 0;
+  z-index: 3;
+  /* Añade transform a la transición para que el movimiento sea fluido */
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+/* ANIMATIONS */
+
+@keyframes golden {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes entradaTriunfal {
+  0% {
+    opacity: 0; /* Invisible */
+    filter: blur(20px); /* Muy borroso y estallado de luz (como un flash) */
+    transform: scale(0.9); /* Más pequeña y más abajo */
+  }
+  10% {
+    opacity: 1; /* Visible */
+    filter: grayscale(100%) brightness(2) blur(10px); /* Nítido y luz normal */
+  }
+
+  80% {
+    transform: scale(1);
+    filter: grayscale(0);
+    /* Tamaño real y en su sitio */
+  }
 }
 
 /* =========================================
