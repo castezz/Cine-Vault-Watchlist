@@ -75,3 +75,14 @@ function mouseBase(event, element) {
   element.style.setProperty("--rotateX", -1 * offsetY + "deg");
   element.style.setProperty("--rotateY", offsetX + "deg");
 }
+
+// HERO CARD (CHANGING COLORS FOR SPAN RANK NUMBER)
+
+const silverGradient = `linear-gradient(
+    45deg,
+    #2c2c2c 0%, 
+    #d1d1d1 25%, 
+    #7a7a7a 50%, 
+    #e0e0e0 75%, 
+    #2c2c2c 100%
+)`;
