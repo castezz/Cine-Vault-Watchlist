@@ -292,15 +292,52 @@
         <div class="hero-backdrop" id="hero-backdrop"></div>
         <div class="hero-overlay"></div>
         <div class="hero-3d-scene">
-          <div class="hero-card-3d golden" id="hero-movie-card">
+          <button class="prevMovie" id="prevMovie">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient
+                  id="myGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" style="stop-color: #ffd700" />
+                  <stop offset="100%" style="stop-color: #daa520" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#myGradient)"
+                d="M8.3685 12L13.1162 3.03212L14.8838 3.9679L10.6315 12L14.8838 20.0321L13.1162 20.9679L8.3685 12Z"
+              ></path>
+            </svg>
+          </button>
+          <button class="nextMovie" id="nextMovie">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient
+                  id="myGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" style="stop-color: #ffd700" />
+                  <stop offset="100%" style="stop-color: #daa520" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#myGradient)"
+                d="M15.6315 12L10.8838 3.03212L9.11622 3.9679L13.3685 12L9.11622 20.0321L10.8838 20.9679L15.6315 12Z"
+              ></path>
+            </svg>
+          </button>
+          <!-- HERO CARDS (MAIN) -->
+          <div class="hero-card-3d golden">
             <div class="layer-logo" id="hero-logo-layer">
               <div class="ranking-badge">
                 <div class="categories">
-                  <ul>
-                    <li>Action</li>
-                    <li>Adventure</li>
-                    <li>Terror</li>
-                  </ul>
+                  <p>Pennyworth: The Origin of Batman's Butler</p>
                 </div>
                 <span class="rank-number">1</span>
               </div>
@@ -319,91 +356,367 @@
                 class="movie-poster-img"
               />
             </div>
-            <div class="card-shine"></div>
+          </div>
+
+          <!-- HERO CARDS (CLONES) -->
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">2</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src="./assets/img/cat-batman.jpg"
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src="./assets/img/cat-lyon.jpg"
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">3</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">4</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">5</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">6</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">7</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">8</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">9</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <div class="hero-card-3d golden">
+            <div class="layer-logo" id="hero-logo-layer">
+              <div class="ranking-badge">
+                <div class="categories">
+                  <p></p>
+                </div>
+                <span class="rank-number">10</span>
+              </div>
+              <img
+                id="hero-logo-img"
+                src=""
+                alt="Movie Logo"
+                class="movie-logo-img"
+              />
+            </div>
+            <div class="layer-poster" id="hero-poster-layer">
+              <img
+                id="hero-poster-img"
+                src=""
+                alt="Movie Poster"
+                class="movie-poster-img"
+              />
+            </div>
+          </div>
+
+          <!-- MORE MOVIES -->
+          <div class="more-movies-container">
+            <button class="more-movies">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"
+                ></path>
+              </svg>
+              <p class="more-movies-text">More Movies</p>
+            </button>
           </div>
         </div>
       </section>
 
       <!-- 
+        TRENDING NOW INFINITE CARROUSEL
+      -->
+      <div class="trending-now-carrousel">
+        <ul class="trending-now-list">
+          <li>TRENDING NOW⚡</li>
+          <li>TRENDING NOW⚡</li>
+          <li>TRENDING NOW⚡</li>
+          <li>TRENDING NOW⚡</li>
+          <li>TRENDING NOW⚡</li>
+          <li>TRENDING NOW⚡</li>
+
+          <li aria-hidden="true">TRENDING NOW⚡</li>
+          <li aria-hidden="true">TRENDING NOW⚡</li>
+          <li aria-hidden="true">TRENDING NOW⚡</li>
+          <li aria-hidden="true">TRENDING NOW⚡</li>
+          <li aria-hidden="true">TRENDING NOW⚡</li>
+          <li id="category-action" aria-hidden="true">TRENDING NOW⚡</li>
+        </ul>
+      </div>
+
+      <!-- 
         CATEGORIAS
         Aquí SÍ usamos .container para que los carruseles se alineen con el logo.
       -->
+      <div class="category-main-container">
+        <section class="category-section">
+          <div class="category-header">
+            <h2>Action</h2>
+          </div>
+          <div class="movie-carousel" id="carousel-action">
+            <div class="movie-card"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <a href="#" class="explore"
+              >Explore
+              <i id="category-scifi" class="fa-solid fa-chevron-right"></i
+            ></a>
+          </div>
+        </section>
 
-      <section id="category-action" class="category-section container">
-        <div class="category-header">
-          <h2>Adrenaline Rush (Action)</h2>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-chevron-right"></i
-          ></a>
-        </div>
-        <div class="movie-carousel" id="carousel-action">
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-        </div>
-      </section>
+        <section id="category-scifi" class="category-section">
+          <div class="category-header">
+            <h2>Sci-Fi</h2>
+          </div>
+          <div class="movie-carousel" id="carousel-scifi">
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <a href="#" class="explore"
+              >Explore
+              <i id="category-horror" class="fa-solid fa-chevron-right"></i
+            ></a>
+          </div>
+        </section>
 
-      <section id="category-scifi" class="category-section container">
-        <div class="category-header">
-          <h2>New Worlds (Sci-Fi)</h2>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-chevron-right"></i
-          ></a>
-        </div>
-        <div class="movie-carousel" id="carousel-scifi">
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-        </div>
-      </section>
+        <section id="category-horror" class="category-section">
+          <div class="category-header">
+            <h2>Horror</h2>
+          </div>
+          <div class="movie-carousel" id="carousel-horror">
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <a href="#" class="explore"
+              >Explore
+              <i id="category-comedy" class="fa-solid fa-chevron-right"></i
+            ></a>
+          </div>
+        </section>
 
-      <section id="category-horror" class="category-section container">
-        <div class="category-header">
-          <h2>Chills & Thrills (Horror)</h2>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-chevron-right"></i
-          ></a>
-        </div>
-        <div class="movie-carousel" id="carousel-horror">
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-        </div>
-      </section>
+        <section id="category-comedy" class="category-section">
+          <div class="category-header">
+            <h2>Comedy</h2>
+          </div>
+          <div class="movie-carousel" id="carousel-comedy">
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <a href="#" class="explore"
+              >Explore
+              <i id="category-romance" class="fa-solid fa-chevron-right"></i
+            ></a>
+          </div>
+        </section>
 
-      <section id="category-comedy" class="category-section container">
-        <div class="category-header">
-          <h2>Laugh Out Loud (Comedy)</h2>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-chevron-right"></i
-          ></a>
-        </div>
-        <div class="movie-carousel" id="carousel-comedy">
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-        </div>
-      </section>
-
-      <section id="category-romance" class="category-section container">
-        <div class="category-header">
-          <h2>Love Stories (Romance)</h2>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-chevron-right"></i
-          ></a>
-        </div>
-        <div class="movie-carousel" id="carousel-romance">
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-          <div class="movie-card skeleton"></div>
-        </div>
-      </section>
+        <section class="category-section">
+          <div class="category-header">
+            <h2>Romance</h2>
+          </div>
+          <div class="movie-carousel" id="carousel-romance">
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <div class="movie-card skeleton"></div>
+            <a href="#" class="explore"
+              >Explore <i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!-- MODAL -->

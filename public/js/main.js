@@ -2,23 +2,15 @@
    1. GLOBAL VARIABLES AND SELECTORS
    ========================================= */
 const body = document.body;
-
-// Sidebar Elements
-const menuBtn = document.querySelector(".mobile-menu-btn"); // Hamburger Button (Navbar)
-const closeBtn = document.querySelector(".close-sidebar-btn"); // Close Button X (Sidebar)
-const overlay = document.querySelector("#sidebar-overlay"); // Dark background overlay
+const menuBtn = document.querySelector(".mobile-menu-btn");
+const closeBtn = document.querySelector(".close-sidebar-btn");
+const overlay = document.querySelector("#sidebar-overlay");
 
 /* =========================================
    2. UI FUNCTIONS
    ========================================= */
 
-/**
- * Toggles the sidebar state (Push Menu).
- * Adds or removes the 'menu-open' class from the body,
- * which triggers all CSS push and slide-in animations.
- */
 function toggleSidebar() {
-  // The logic happens here: we simply toggle a class on the root element
   body.classList.toggle("menu-open");
 }
 
@@ -29,7 +21,6 @@ function toggleSidebar() {
 // 1. Open menu when clicking the hamburger button
 if (menuBtn) {
   menuBtn.addEventListener("click", (e) => {
-    // Prevents default behavior if the element is an anchor tag
     e.preventDefault();
     toggleSidebar();
   });
@@ -48,41 +39,111 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* =========================================
-   4. HERO-CARD JS MOUSE TRACKING
+   4. NAV-SEARCH
    ========================================= */
 
-const heroCard = document.querySelector(".hero-card-3d");
+/* =========================================
+   5. HERO-CARD: 3D TRACKING + CAROUSEL
+   ========================================= */
 
-document.addEventListener("mousemove", (event) => {
-  mouseBase(event, heroCard);
-});
+// 1. GLOBAL VARIABLES
+const cards = document.querySelectorAll(".hero-card-3d");
+const btnNext = document.getElementById("nextMovie");
+const btnPrev = document.getElementById("prevMovie");
+let currentIndex = 0;
 
-/**
- * Calculates mouse position relative to the center of the screen
- * and updates CSS variables for 3D rotation effects.
- */
+// 2. MOUSE BASE FUNCTION
 function mouseBase(event, element) {
+  if (!element) return;
+
   const x = event.clientX;
   const y = event.clientY;
-
   const middleX = window.innerWidth / 2;
   const middleY = window.innerHeight / 2;
 
-  // Calculate rotation intensity based on offset from center
-  const offsetX = ((x - middleX) / middleX) * 5;
-  const offsetY = ((y - middleY) / middleY) * 5;
+  const offsetX = ((x - middleX) / middleX) * 10;
+  const offsetY = ((y - middleY) / middleY) * 10;
 
   element.style.setProperty("--rotateX", -1 * offsetY + "deg");
   element.style.setProperty("--rotateY", offsetX + "deg");
 }
 
-// HERO CARD (CHANGING COLORS FOR SPAN RANK NUMBER)
+// 3. MOUSE EVENT (Dynamic)
+document.addEventListener("mousemove", (event) => {
+  if (cards.length > 0) {
+    mouseBase(event, cards[currentIndex]);
+  }
+});
 
-const silverGradient = `linear-gradient(
-    45deg,
-    #2c2c2c 0%, 
-    #d1d1d1 25%, 
-    #7a7a7a 50%, 
-    #e0e0e0 75%, 
-    #2c2c2c 100%
-)`;
+// 4. CAROUSEL LOGIC
+function updateCarousel() {
+  cards.forEach((card) => {
+    card.classList.remove("currentCard", "prevCard", "nextCard");
+
+    card.style.setProperty("--rotateX", "0deg");
+    card.style.setProperty("--rotateY", "0deg");
+  });
+
+  const total = cards.length;
+  if (total === 0) return;
+
+  let prevIndex = (currentIndex - 1 + total) % total;
+  let nextIndex = (currentIndex + 1) % total;
+
+  const activeCard = cards[currentIndex];
+  activeCard.classList.add("currentCard");
+  cards[prevIndex].classList.add("prevCard");
+  cards[nextIndex].classList.add("nextCard");
+
+  activeCard.classList.add("locked");
+
+  setTimeout(() => {
+    activeCard.classList.remove("locked");
+  }, 800);
+}
+
+let isAnimating = false;
+
+// 5. NEXT BUTTON
+
+document.getElementById("nextMovie").addEventListener("click", () => {
+  if (isAnimating) return;
+
+  isAnimating = true;
+
+  currentIndex = (currentIndex + 1) % cards.length;
+  updateCarousel();
+
+  setTimeout(() => {
+    isAnimating = false;
+  }, 800);
+});
+
+// 6. PREVIOUS BUTTON
+document.getElementById("prevMovie").addEventListener("click", () => {
+  if (isAnimating) return;
+
+  isAnimating = true;
+
+  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+  updateCarousel();
+
+  setTimeout(() => {
+    isAnimating = false;
+  }, 800);
+});
+
+if (cards.length > 0) {
+  updateCarousel();
+}
+
+// HERO CARD COLORS
+
+// const silverGradient = `linear-gradient(
+//     45deg,
+//     #2c2c2c 0%,
+//     #d1d1d1 25%,
+//     #7a7a7a 50%,
+//     #e0e0e0 75%,
+//     #2c2c2c 100%
+// )`;
